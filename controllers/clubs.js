@@ -1,7 +1,7 @@
 class Clubs {
   static welcome(req, res, next) {
-    res.send({ message: "Welcome to Football Clubs Api" });
+    res.send({ message: 'Welcome to Football Clubs Api' })
   }
 }
 
-export default Clubs;
+export default Clubs
