@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import models from '../models/index'
 
 const clubsModel = models.Clubs
@@ -14,16 +15,37 @@ class Clubs {
   }
 
   static addClubs(req, res) {
-    clubsModel.create({
-      name: req.body.name,
-      stadium: req.body.stadium,
-      capacity: req.body.capacity,
-      manager: req.body.manager,
-      captain: req.body.captain,
-      location: req.body.location
-    }).then((newClub) => res
-      .status(201)
-      .send({ message: 'Club added successfully', newClub }))
+    clubsModel
+      .create({
+        name: req.body.name,
+        stadium: req.body.stadium,
+        capacity: req.body.capacity,
+        manager: req.body.manager,
+        captain: req.body.captain,
+        location: req.body.location
+      })
+      .then((newClub) =>
+        res.status(201).send({ message: 'Club added successfully', newClub }))
+  }
+
+  static updateClub(req, res) {
+    const id = parseInt(req.params.id)
+    clubsModel.findByPk(id).then((club) => {
+      club
+        .update({
+          name: req.body.name || club.name,
+          stadium: req.body.stadium || club.stadium,
+          capacity: req.body.capacity || club.capacity,
+          manager: req.body.manager || club.manager,
+          captain: req.body.captain,
+          location: req.body.location || club.location
+        })
+        .then((clubsupdate) => {
+          res
+            .status(200)
+            .send({ message: 'Club updated successfully', clubsupdate })
+        })
+    })
   }
 }
 
