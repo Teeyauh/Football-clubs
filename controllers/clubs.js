@@ -47,6 +47,20 @@ class Clubs {
         })
     })
   }
+
+  static deleteClub(req, res) {
+    const id = parseInt(req.params.id)
+    clubsModel.findByPk(id).then((club) => {
+      if (!club) {
+        return res.status(404).send({
+          message: 'club cannot be found'
+        })
+      }
+      return club.destroy().then(() => res.status(204).send({
+        message: 'Club deleted successfully'
+      }))
+    })
+  }
 }
 
 export default Clubs
