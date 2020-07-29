@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       Capacity: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       Manager: {
         type: Sequelize.STRING
