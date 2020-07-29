@@ -56,10 +56,31 @@ class Clubs {
           message: 'club cannot be found'
         })
       }
-      return club.destroy().then(() => res.status(204).send({
-        message: 'Club deleted successfully'
-      }))
+      return club.destroy().then(() =>
+        res.status(204).send({
+          message: 'Club deleted successfully'
+        }))
     })
+  }
+
+  static getSingleClub(req, res) {
+    const id = parseInt(req.params.id)
+    clubsModel
+      .findOne({
+        where: {
+          id
+        }
+      })
+      .then((club) => {
+        if (!club) {
+          return res.status(404).send({
+            message: 'Club cannot be found'
+          })
+        }
+        return res
+          .status(201)
+          .send({ message: 'Club found successfully', club })
+      })
   }
 }
 
