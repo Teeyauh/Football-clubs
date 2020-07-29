@@ -10,4 +10,5 @@ router.get('/clubs', Clubs.getAllClubs)
 router.post('/clubs', Clubs.addClubs)
 router.put('/clubs/:id', Clubs.updateClub)
 router.delete('/club/:id', Clubs.deleteClub)
+router.get('/club/:id', Clubs.getSingleClub)
 module.exports = router
