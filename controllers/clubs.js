@@ -97,6 +97,20 @@ class Clubs {
         .send({ name })
     })
   }
+
+  static searchClubByStadium(req, res) {
+    clubsModel.findAll({
+      where: {
+        stadium: {
+          [Op.substring]: `%${req.query.stadium}%`
+        }
+      }
+    }).then((stadium) => {
+      res
+        .status(200)
+        .send({ stadium })
+    })
+  }
 }
 
 export default Clubs
