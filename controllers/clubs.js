@@ -153,6 +153,20 @@ class Clubs {
         res.status(200).send({ captain })
       })
   }
+
+  static searchClubByLocation(req, res) {
+    clubsModel
+      .findAll({
+        where: {
+          location: {
+            [Op.substring]: `%${req.query.location}%`
+          }
+        }
+      })
+      .then((location) => {
+        res.status(200).send({ location })
+      })
+  }
 }
 
 export default Clubs
