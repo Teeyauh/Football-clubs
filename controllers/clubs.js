@@ -139,6 +139,20 @@ class Clubs {
         res.status(200).send({ manager })
       })
   }
+
+  static searchClubByCaptain(req, res) {
+    clubsModel
+      .findAll({
+        where: {
+          captain: {
+            [Op.substring]: `%${req.query.captain}%`
+          }
+        }
+      })
+      .then((captain) => {
+        res.status(200).send({ captain })
+      })
+  }
 }
 
 export default Clubs
