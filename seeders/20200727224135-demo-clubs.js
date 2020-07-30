@@ -11,7 +11,7 @@ module.exports = {
           Capacity: 60260,
           Manager: 'Mikel Arteta',
           Captain: 'Pierre-Emerick Aubameyang',
-          Location: 'North London',
+          country: 'England',
           createdAt: new Date(),
           updatedAt: new Date()
         }

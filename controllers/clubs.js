@@ -23,7 +23,7 @@ class Clubs {
         capacity: req.body.capacity,
         manager: req.body.manager,
         captain: req.body.captain,
-        location: req.body.location
+        country: req.body.country
       })
       .then((newClub) =>
         res.status(201).send({ message: 'Club added successfully', newClub }))
@@ -39,7 +39,7 @@ class Clubs {
           capacity: req.body.capacity || club.capacity,
           manager: req.body.manager || club.manager,
           captain: req.body.captain,
-          location: req.body.location || club.location
+          country: req.body.country || club.country
         })
         .then((clubsupdate) => {
           res
@@ -154,17 +154,17 @@ class Clubs {
       })
   }
 
-  static searchClubByLocation(req, res) {
+  static searchClubByCountry(req, res) {
     clubsModel
       .findAll({
         where: {
-          location: {
-            [Op.substring]: `%${req.query.location}%`
+          country: {
+            [Op.substring]: `%${req.query.country}%`
           }
         }
       })
-      .then((location) => {
-        res.status(200).send({ location })
+      .then((country) => {
+        res.status(200).send({ country })
       })
   }
 }
