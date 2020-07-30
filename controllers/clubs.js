@@ -85,45 +85,59 @@ class Clubs {
   }
 
   static searchClubByName(req, res) {
-    clubsModel.findAll({
-      where: {
-        name: {
-          [Op.substring]: `%${req.query.name}%`
+    clubsModel
+      .findAll({
+        where: {
+          name: {
+            [Op.substring]: `%${req.query.name}%`
+          }
         }
-      }
-    }).then((name) => {
-      res
-        .status(200)
-        .send({ name })
-    })
+      })
+      .then((name) => {
+        res.status(200).send({ name })
+      })
   }
 
   static searchClubByStadium(req, res) {
-    clubsModel.findAll({
-      where: {
-        stadium: {
-          [Op.substring]: `%${req.query.stadium}%`
+    clubsModel
+      .findAll({
+        where: {
+          stadium: {
+            [Op.substring]: `%${req.query.stadium}%`
+          }
         }
-      }
-    }).then((stadium) => {
-      res
-        .status(200)
-        .send({ stadium })
-    })
+      })
+      .then((stadium) => {
+        res.status(200).send({ stadium })
+      })
   }
 
   static searchClubByCapacity(req, res) {
-    clubsModel.findAll({
-      where: {
-        capacity: {
-          [Op.substring]: `%${req.query.capacity}%`
+    clubsModel
+      .findAll({
+        where: {
+          capacity: {
+            [Op.substring]: `%${req.query.capacity}%`
+          }
         }
-      }
-    }).then((capacity) => {
-      res
-        .status(200)
-        .send({ capacity })
-    })
+      })
+      .then((capacity) => {
+        res.status(200).send({ capacity })
+      })
+  }
+
+  static searchClubByManager(req, res) {
+    clubsModel
+      .findAll({
+        where: {
+          manager: {
+            [Op.substring]: `%${req.query.manager}%`
+          }
+        }
+      })
+      .then((manager) => {
+        res.status(200).send({ manager })
+      })
   }
 }
 
