@@ -16,4 +16,5 @@ router.get('/club/stadium', Clubs.searchClubByStadium)
 router.get('/club/capacity', Clubs.searchClubByCapacity)
 router.get('/club/manager', Clubs.searchClubByManager)
 router.get('/club/captain', Clubs.searchClubByCaptain)
+router.get('/club/location', Clubs.searchClubByLocation)
 module.exports = router
