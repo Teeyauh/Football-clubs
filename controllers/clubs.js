@@ -1,4 +1,5 @@
 /* eslint-disable radix */
+import { Op } from 'sequelize'
 import models from '../models/index'
 
 const clubsModel = models.Clubs
@@ -81,6 +82,20 @@ class Clubs {
           .status(201)
           .send({ message: 'Club found successfully', club })
       })
+  }
+
+  static searchClubByName(req, res) {
+    clubsModel.findAll({
+      where: {
+        name: {
+          [Op.substring]: `%${req.query.name}%`
+        }
+      }
+    }).then((name) => {
+      res
+        .status(200)
+        .send({ name })
+    })
   }
 }
 
