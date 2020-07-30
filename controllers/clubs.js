@@ -111,6 +111,20 @@ class Clubs {
         .send({ stadium })
     })
   }
+
+  static searchClubByCapacity(req, res) {
+    clubsModel.findAll({
+      where: {
+        capacity: {
+          [Op.substring]: `%${req.query.capacity}%`
+        }
+      }
+    }).then((capacity) => {
+      res
+        .status(200)
+        .send({ capacity })
+    })
+  }
 }
 
 export default Clubs
