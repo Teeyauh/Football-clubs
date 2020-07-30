@@ -24,7 +24,7 @@ module.exports = {
       Captain: {
         type: Sequelize.STRING
       },
-      Location: {
+      Country: {
         type: Sequelize.STRING
       },
       createdAt: {

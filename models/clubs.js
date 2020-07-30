@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       Capacity: DataTypes.INTEGER,
       Manager: DataTypes.STRING,
       Captain: DataTypes.STRING,
-      Location: DataTypes.STRING
+      Country: DataTypes.STRING
     },
     {}
   )
