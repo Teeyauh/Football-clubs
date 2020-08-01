@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/extensions
+import 'regenerator-runtime/runtime.js';
+
 const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
