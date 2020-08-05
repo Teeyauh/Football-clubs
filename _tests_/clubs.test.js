@@ -267,4 +267,23 @@ describe('Football Clubs Api', () => {
       })
     })
   })
+  describe('Get a single club', () => {
+    it('it should get a club by id', (done) => {
+      request.get(`/club/${newClub.id}`).end((err, res) => {
+        res.status.should.be.equal(201)
+        res.body.should.be.a('object')
+        expect(res.body.club).to.have.property('name')
+        expect(res.body.club).to.have.property('stadium')
+        expect(res.body.club).to.have.property('country')
+        done()
+      })
+    })
+    it('it should get a club by id', (done) => {
+      request.get('/club/1478').end((err, res) => {
+        res.status.should.be.equal(404)
+        expect(res.body.message).to.equal('Club cannot be found')
+        done()
+      })
+    })
+  })
 })
