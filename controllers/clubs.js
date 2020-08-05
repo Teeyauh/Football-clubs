@@ -111,7 +111,7 @@ class Clubs {
         }
       })
       .then((stadium) => {
-        res.status(200).send({ stadium })
+        res.status(200).send({ data: stadium })
       })
   }
 
