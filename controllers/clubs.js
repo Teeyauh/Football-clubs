@@ -32,7 +32,10 @@ class Clubs {
   static updateClub(req, res) {
     const id = parseInt(req.params.id)
     clubsModel.findByPk(id).then((club) => {
-      club
+      if (!club) {
+        return res.status(404).send({ message: 'Club not found' })
+      }
+      return club
         .update({
           name: req.body.name || club.name,
           stadium: req.body.stadium || club.stadium,
