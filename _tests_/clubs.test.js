@@ -310,4 +310,16 @@ describe('Football Clubs Api', () => {
         })
     })
   })
+  describe('Search club by Manager', () => {
+    it('should get book by manager', (done) => {
+      request
+        .get('/clubs/manager')
+        .query({ manager: 'Tayo' })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.data).to.be.an('array')
+          done()
+        })
+    })
+  })
 })
