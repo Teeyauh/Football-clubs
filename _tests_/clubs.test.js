@@ -29,26 +29,23 @@ describe('Football Clubs Api', () => {
     })
     // eslint-disable-next-line no-const-assign
     newClub = await clubsModel.create({
-      Name: 'Leicester City F.C.',
-      Stadium: 'King Power Stadium',
-      Capacity: 32312,
-      Manager: 'Brendan Rodgers',
-      Captain: 'Wes Morgan',
+      name: 'Leicester City F.C.',
+      stadium: 'King Power Stadium',
+      capacity: 32312,
+      manager: 'Brendan Rodgers',
+      captain: 'Wes Morgan',
       country: 'England'
     })
     await clubsModel.create({
-      Name: 'Chelsea F.C.',
-      Stadium: 'Stamford Bridge',
-      Capacity: 41837,
-      Manager: 'Frank Lampard',
-      Captain: 'César Azpilicueta',
+      name: 'Chelsea F.C.',
+      stadium: 'Stamford Bridge',
+      capacity: 41837,
+      manager: 'Frank Lampard',
+      captain: 'César Azpilicueta',
       country: 'England'
     })
   })
-  after(async () => {
-    // empty the database
-    await clubsModel.destroy({ where: {} })
-  })
+
   describe('Index route', () => {
     it('should return welcome message when /clubs route is matched', (done) => {
       request.get('/').end((err, res) => {
@@ -73,16 +70,84 @@ describe('Football Clubs Api', () => {
       request
         .put(`/clubs/${newClub.id}`)
         .send({
-          name: 'Fashola FC.',
-          stadium: 'somewhere',
-          capacity: 13360,
-          manager: 'Fash',
-          captain: 'Niyo',
-          country: 'Nigeria'
+          name: 'Man City F.C.',
+          stadium: 'King Power Stadium',
+          capacity: '32312',
+          manager: 'Brendan Rodgers',
+          captain: 'Silva',
+          country: 'England'
         })
         .end((err, res) => {
           expect(res.status).to.equal(200)
           expect(res.body.message).be.equal('Club updated successfully')
+          done()
+        })
+    })
+    it('should return club with this id does not exist', (done) => {
+      request
+        .put('/clubs/23456')
+        .send({
+          name: 'cardiff City F.C.',
+          stadium: 'King Power Stadium',
+          capacity: '32312',
+          manager: 'Brendan Rodgers',
+          captain: 'Morgan',
+          country: 'England'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(404)
+          expect(res.body.message).be.equal('Club not found')
+          done()
+        })
+    })
+    it('should return name cannot be empty if user doesnt put a name', (done) => {
+      request
+        .put(`/clubs/${newClub.id}`)
+        .send({
+          name: '',
+          stadium: 'somewhere',
+          capacity: 57000,
+          manager: 'Paul',
+          captain: 'CR',
+          country: 'Nigeria'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Name cannot be empty')
+          done()
+        })
+    })
+    it('should return capacity must be a number if the capacity entered isnt a number', (done) => {
+      request
+        .put(`/clubs/${newClub.id}`)
+        .send({
+          name: 'test club',
+          stadium: 'somewhere',
+          capacity: '',
+          manager: 'Paul',
+          captain: 'CR',
+          country: 'Nigeria'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Capacity must be a number')
+          done()
+        })
+    })
+    it('should return stadium cannot be empty if user doesnt put a stadium', (done) => {
+      request
+        .put(`/clubs/${newClub.id}`)
+        .send({
+          name: 'test club',
+          stadium: '',
+          capacity: '57000',
+          manager: 'Paul',
+          captain: 'CR',
+          country: 'Nigeria'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Stadium cannot be empty')
           done()
         })
     })

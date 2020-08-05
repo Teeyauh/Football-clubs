@@ -8,6 +8,9 @@ const validateAddClub = (req, res, next) => {
   if (!req.body.country.trim()) {
     return res.status(400).send({ message: 'Country cannot be empty' })
   }
+  if (!req.body.stadium.trim()) {
+    return res.status(400).send({ message: 'Stadium cannot be empty' })
+  }
   if (!isNumeric(req.body.capacity)) {
     return res.status(400).send({ message: 'Capacity must be a number' })
   }
