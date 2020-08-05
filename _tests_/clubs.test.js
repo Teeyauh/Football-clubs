@@ -322,4 +322,16 @@ describe('Football Clubs Api', () => {
         })
     })
   })
+  describe('Search club by Captain', () => {
+    it('should get book by captain', (done) => {
+      request
+        .get('/clubs/captain')
+        .query({ captain: 'Pierre' })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.data).to.be.an('array')
+          done()
+        })
+    })
+  })
 })
