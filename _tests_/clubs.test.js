@@ -13,6 +13,7 @@ const should = chai.should()
 const request = supertest.agent(server)
 const clubsModel = models.Clubs
 let newClub = {}
+let clubToDelete = {}
 
 describe('Football Clubs Api', () => {
   before(async () => {
@@ -43,6 +44,15 @@ describe('Football Clubs Api', () => {
       manager: 'Frank Lampard',
       captain: 'César Azpilicueta',
       country: 'England'
+    })
+
+    clubToDelete = await clubsModel.create({
+      name: 'Real Madrid F.C.',
+      stadium: 'Santiago Bernabeu',
+      capacity: '81044',
+      manager: 'Zinedine Zidane',
+      captain: 'Sergio Ramos',
+      country: 'Spain'
     })
   })
   after(async () => {
@@ -240,6 +250,21 @@ describe('Football Clubs Api', () => {
           expect(res.body.message).be.equal('Stadium cannot be empty')
           done()
         })
+    })
+  })
+  describe('Delete club', () => {
+    it('should delete a Club given the id', (done) => {
+      request.delete(`/club/${clubToDelete.id}`).end((err, res) => {
+        res.status.should.be.equal(204)
+        done()
+      })
+    })
+    it('should return Club does not exist', (done) => {
+      request.delete('/club/508020').end((err, res) => {
+        res.status.should.be.equal(404)
+        expect(res.body.message).be.equal('club cannot be found')
+        done()
+      })
     })
   })
 })
