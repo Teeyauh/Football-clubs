@@ -286,4 +286,16 @@ describe('Football Clubs Api', () => {
       })
     })
   })
+  describe('Search club by name', () => {
+    it('should get book by name', (done) => {
+      request
+        .get('/clubs/name')
+        .query({ name: 'Teeyauh FC.' })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.data).to.be.an('array')
+          done()
+        })
+    })
+  })
 })
