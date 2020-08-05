@@ -9,22 +9,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      Name: {
+      name: {
         type: Sequelize.STRING
       },
-      Stadium: {
+      stadium: {
         type: Sequelize.STRING
       },
-      Capacity: {
+      capacity: {
         type: Sequelize.INTEGER
       },
-      Manager: {
+      manager: {
         type: Sequelize.STRING
       },
-      Captain: {
+      captain: {
         type: Sequelize.STRING
       },
-      Country: {
+      country: {
         type: Sequelize.STRING
       },
       createdAt: {

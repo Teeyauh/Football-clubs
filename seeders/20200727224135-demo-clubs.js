@@ -6,11 +6,11 @@ module.exports = {
       'Clubs',
       [
         {
-          Name: 'Arsenal F.C.',
-          Stadium: 'Emirates Stadium',
-          Capacity: 60260,
-          Manager: 'Mikel Arteta',
-          Captain: 'Pierre-Emerick Aubameyang',
+          name: 'Arsenal F.C.',
+          stadium: 'Emirates Stadium',
+          capacity: 60260,
+          manager: 'Mikel Arteta',
+          captain: 'Pierre-Emerick Aubameyang',
           country: 'England',
           createdAt: new Date(),
           updatedAt: new Date()
