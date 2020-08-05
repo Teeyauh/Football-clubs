@@ -2,12 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   const Clubs = sequelize.define(
     'Clubs',
     {
-      Name: DataTypes.STRING,
-      Stadium: DataTypes.STRING,
-      Capacity: DataTypes.INTEGER,
-      Manager: DataTypes.STRING,
-      Captain: DataTypes.STRING,
-      Country: DataTypes.STRING
+      name: DataTypes.STRING,
+      stadium: DataTypes.STRING,
+      capacity: DataTypes.INTEGER,
+      manager: DataTypes.STRING,
+      captain: DataTypes.STRING,
+      country: DataTypes.STRING
     },
     {}
   )

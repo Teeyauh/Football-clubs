@@ -12,6 +12,7 @@ const should = chai.should()
 
 const request = supertest.agent(server)
 const clubsModel = models.Clubs
+let newClub = {}
 
 describe('Football Clubs Api', () => {
   before(async () => {
@@ -19,12 +20,29 @@ describe('Football Clubs Api', () => {
     await models.sequelize.sync()
 
     await clubsModel.create({
-      Name: 'Teeyauh FC.',
-      Stadium: 'Lokogoma',
-      Capacity: 70360,
-      Manager: 'Tayo',
-      Captain: 'Pierre',
+      name: 'Teeyauh FC.',
+      stadium: 'Lokogoma',
+      capacity: 70360,
+      manager: 'Tayo',
+      captain: 'Pierre',
       country: 'Nigeria'
+    })
+    // eslint-disable-next-line no-const-assign
+    newClub = await clubsModel.create({
+      Name: 'Leicester City F.C.',
+      Stadium: 'King Power Stadium',
+      Capacity: 32312,
+      Manager: 'Brendan Rodgers',
+      Captain: 'Wes Morgan',
+      country: 'England'
+    })
+    await clubsModel.create({
+      Name: 'Chelsea F.C.',
+      Stadium: 'Stamford Bridge',
+      Capacity: 41837,
+      Manager: 'Frank Lampard',
+      Captain: 'César Azpilicueta',
+      country: 'England'
     })
   })
   after(async () => {
@@ -48,6 +66,25 @@ describe('Football Clubs Api', () => {
         expect(res.body.message).be.equal('Clubs retrieved successfully')
         done()
       })
+    })
+  })
+  describe('Update club route', () => {
+    it('should UPDATE a club by the id', (done) => {
+      request
+        .put(`/clubs/${newClub.id}`)
+        .send({
+          name: 'Fashola FC.',
+          stadium: 'somewhere',
+          capacity: 13360,
+          manager: 'Fash',
+          captain: 'Niyo',
+          country: 'Nigeria'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200)
+          expect(res.body.message).be.equal('Club updated successfully')
+          done()
+        })
     })
   })
 })
