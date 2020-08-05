@@ -45,7 +45,10 @@ describe('Football Clubs Api', () => {
       country: 'England'
     })
   })
-
+  after(async () => {
+    // empty the database
+    await clubsModel.destroy({ where: {} })
+  })
   describe('Index route', () => {
     it('should return welcome message when /clubs route is matched', (done) => {
       request.get('/').end((err, res) => {
@@ -144,6 +147,93 @@ describe('Football Clubs Api', () => {
           manager: 'Paul',
           captain: 'CR',
           country: 'Nigeria'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Stadium cannot be empty')
+          done()
+        })
+    })
+  })
+  describe('Add a new club', () => {
+    it('should add club', (done) => {
+      request
+        .post('/clubs')
+        .send({
+          name: 'Barcelona F.C.',
+          stadium: 'Camp Nou',
+          capacity: '99354',
+          manager: 'Quique Setién',
+          captain: 'Messi',
+          country: 'Spain'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(201)
+          expect(res.body.message).be.equal('Club added successfully')
+          done()
+        })
+    })
+    it('should Add Club when id does not exist', (done) => {
+      request
+        .post('/clubs/5555')
+        .send({
+          name: 'Barcelona F.C.',
+          stadium: 'Camp Nou',
+          capacity: '99354',
+          manager: 'Quique Setién',
+          captain: 'Messi',
+          country: 'Spain'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(404)
+          expect(res.body.message).be.equal(undefined)
+          done()
+        })
+    })
+    it('should return name cannot be empty if user doesnt put a name', (done) => {
+      request
+        .post('/clubs')
+        .send({
+          name: '',
+          stadium: 'Camp Nou',
+          capacity: '99354',
+          manager: 'Quique Setién',
+          captain: 'Messi',
+          country: 'Spain'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Name cannot be empty')
+          done()
+        })
+    })
+    it('should return capacity must be a number if the capacity entered isnt a number', (done) => {
+      request
+        .post('/clubs')
+        .send({
+          name: 'Barcelona F.C.',
+          stadium: 'Camp Nou',
+          capacity: '',
+          manager: 'Quique Setién',
+          captain: 'Messi',
+          country: 'Spain'
+        })
+        .end((err, res) => {
+          res.status.should.be.equal(400)
+          expect(res.body.message).be.equal('Capacity must be a number')
+          done()
+        })
+    })
+    it('should return stadium cannot be empty if user doesnt put a stadium', (done) => {
+      request
+        .post('/clubs')
+        .send({
+          name: 'Barcelona F.C.',
+          stadium: '',
+          capacity: '99354',
+          manager: 'Quique Setién',
+          captain: 'Messi',
+          country: 'Spain'
         })
         .end((err, res) => {
           res.status.should.be.equal(400)
