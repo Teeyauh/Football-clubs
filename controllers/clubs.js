@@ -153,7 +153,7 @@ class Clubs {
         }
       })
       .then((captain) => {
-        res.status(200).send({ captain })
+        res.status(200).send({ data: captain })
       })
   }
 
