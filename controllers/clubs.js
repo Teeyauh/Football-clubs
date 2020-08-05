@@ -167,7 +167,7 @@ class Clubs {
         }
       })
       .then((country) => {
-        res.status(200).send({ country })
+        res.status(200).send({ data: country })
       })
   }
 }

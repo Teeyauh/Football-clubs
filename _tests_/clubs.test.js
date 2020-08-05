@@ -334,4 +334,16 @@ describe('Football Clubs Api', () => {
         })
     })
   })
+  describe('Search club by Country', () => {
+    it('should get book by country', (done) => {
+      request
+        .get('/clubs/country')
+        .query({ country: 'Nigeria' })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.data).to.be.an('array')
+          done()
+        })
+    })
+  })
 })
