@@ -139,7 +139,7 @@ class Clubs {
         }
       })
       .then((manager) => {
-        res.status(200).send({ manager })
+        res.status(200).send({ data: manager })
       })
   }
 
