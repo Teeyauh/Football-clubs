@@ -310,4 +310,16 @@ describe('Football Clubs Api', () => {
         })
     })
   })
+  describe('Search club by Capacity', () => {
+    it('should get book by capacity', (done) => {
+      request
+        .get('/clubs/capacity')
+        .query({ capacity: '32312' })
+        .end((err, res) => {
+          res.status.should.be.equal(200)
+          expect(res.body.data).to.be.an('array')
+          done()
+        })
+    })
+  })
 })

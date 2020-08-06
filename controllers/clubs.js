@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable radix */
 import { Op } from 'sequelize'
 import models from '../models/index'
@@ -116,17 +117,18 @@ class Clubs {
   }
 
   static searchClubByCapacity(req, res) {
-    clubsModel
-      .findAll({
+    if (req.query.capacity) {
+      const capacity = parseInt(req.query.capacity)
+      clubsModel.findAll({
         where: {
           capacity: {
-            [Op.substring]: `%${req.query.capacity}%`
+            [Op.eq]: capacity
           }
-        }
+        }.then((info) => {
+          res.status(200).send({ data: info })
+        })
       })
-      .then((capacity) => {
-        res.status(200).send({ capacity })
-      })
+    }
   }
 
   static searchClubByManager(req, res) {
