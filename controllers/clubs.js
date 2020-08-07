@@ -143,7 +143,7 @@ class Clubs {
         },
       })
       .then((manager) => {
-        res.status(200).send({ manager })
+        res.status(200).send({ data: manager })
       })
   }
 
@@ -157,7 +157,7 @@ class Clubs {
         },
       })
       .then((captain) => {
-        res.status(200).send({ captain })
+        res.status(200).send({ data: captain })
       })
   }
 
@@ -171,7 +171,7 @@ class Clubs {
         },
       })
       .then((country) => {
-        res.status(200).send({ country })
+        res.status(200).send({ data: country })
       })
   }
 }
