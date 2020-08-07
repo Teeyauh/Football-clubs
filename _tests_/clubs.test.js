@@ -311,7 +311,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by Capacity', () => {
-    it('should get book by capacity', (done) => {
+    it('should get club by capacity', (done) => {
       request
         .get('/clubs/capacity')
         .query({ capacity: '32312' })

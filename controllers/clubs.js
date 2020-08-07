@@ -24,10 +24,10 @@ class Clubs {
         capacity: req.body.capacity,
         manager: req.body.manager,
         captain: req.body.captain,
-        country: req.body.country
+        country: req.body.country,
       })
       .then((newClub) =>
-        res.status(201).send({ message: 'Club added successfully', newClub }))
+        res.status(201).send({ message: 'Club added successfully', newClub }),)
   }
 
   static updateClub(req, res) {
@@ -43,7 +43,7 @@ class Clubs {
           capacity: req.body.capacity || club.capacity,
           manager: req.body.manager || club.manager,
           captain: req.body.captain,
-          country: req.body.country || club.country
+          country: req.body.country || club.country,
         })
         .then((clubsupdate) => {
           res
@@ -58,13 +58,13 @@ class Clubs {
     clubsModel.findByPk(id).then((club) => {
       if (!club) {
         return res.status(404).send({
-          message: 'club cannot be found'
+          message: 'club cannot be found',
         })
       }
       return club.destroy().then(() =>
         res.status(204).send({
-          message: 'Club deleted successfully'
-        }))
+          message: 'Club deleted successfully',
+        }),)
     })
   }
 
@@ -73,13 +73,13 @@ class Clubs {
     clubsModel
       .findOne({
         where: {
-          id
-        }
+          id,
+        },
       })
       .then((club) => {
         if (!club) {
           return res.status(404).send({
-            message: 'Club cannot be found'
+            message: 'Club cannot be found',
           })
         }
         return res
@@ -93,9 +93,9 @@ class Clubs {
       .findAll({
         where: {
           name: {
-            [Op.substring]: `%${req.query.name}%`
-          }
-        }
+            [Op.substring]: `%${req.query.name}%`,
+          },
+        },
       })
       .then((name) => {
         res.status(200).send({ data: name })
@@ -107,9 +107,9 @@ class Clubs {
       .findAll({
         where: {
           stadium: {
-            [Op.substring]: `%${req.query.stadium}%`
-          }
-        }
+            [Op.substring]: `%${req.query.stadium}%`,
+          },
+        },
       })
       .then((stadium) => {
         res.status(200).send({ data: stadium })
@@ -119,15 +119,17 @@ class Clubs {
   static searchClubByCapacity(req, res) {
     if (req.query.capacity) {
       const capacity = parseInt(req.query.capacity)
-      clubsModel.findAll({
-        where: {
-          capacity: {
-            [Op.eq]: capacity
-          }
-        }.then((info) => {
+      clubsModel
+        .findAll({
+          where: {
+            capacity: {
+              [Op.eq]: capacity,
+            },
+          },
+        })
+        .then((info) => {
           res.status(200).send({ data: info })
         })
-      })
     }
   }
 
@@ -136,9 +138,9 @@ class Clubs {
       .findAll({
         where: {
           manager: {
-            [Op.substring]: `%${req.query.manager}%`
-          }
-        }
+            [Op.substring]: `%${req.query.manager}%`,
+          },
+        },
       })
       .then((manager) => {
         res.status(200).send({ manager })
@@ -150,9 +152,9 @@ class Clubs {
       .findAll({
         where: {
           captain: {
-            [Op.substring]: `%${req.query.captain}%`
-          }
-        }
+            [Op.substring]: `%${req.query.captain}%`,
+          },
+        },
       })
       .then((captain) => {
         res.status(200).send({ captain })
@@ -164,9 +166,9 @@ class Clubs {
       .findAll({
         where: {
           country: {
-            [Op.substring]: `%${req.query.country}%`
-          }
-        }
+            [Op.substring]: `%${req.query.country}%`,
+          },
+        },
       })
       .then((country) => {
         res.status(200).send({ country })
