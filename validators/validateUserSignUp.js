@@ -2,7 +2,7 @@ import validator from 'validator'
 import { hasUpperCase, hasSpecialChar, hasNumber } from '../utils/strings'
 
 // eslint-disable-next-line consistent-return
-const validateSignup = (req, res, next) => {
+const validateUserSignup = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body
 
   if (!firstName) {
@@ -50,7 +50,7 @@ const validateSignup = (req, res, next) => {
     !hasSpecialChar(password) ||
     !hasNumber(password)
   ) {
-    return res.status(404).send({
+    return res.status(400).send({
       message:
         'password must contain at least one uppercase letter, one special character and one number'
     })
@@ -59,4 +59,4 @@ const validateSignup = (req, res, next) => {
   next()
 }
 
-export default validateSignup
+export default validateUserSignup
