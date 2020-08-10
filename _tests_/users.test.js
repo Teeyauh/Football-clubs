@@ -212,7 +212,7 @@ describe('User test', () => {
         .post('/users/signup')
         .send({
           firstName: 'Tayo',
-          lastName: 'Oguna',
+          lastName: 'Oguns',
           email: 'teeyauh@gmail.com',
           password: 'Somep@ssw4ordd',
         })
