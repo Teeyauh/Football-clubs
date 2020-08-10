@@ -287,7 +287,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by name', () => {
-    it('should get book by name', (done) => {
+    it('should get club by name', (done) => {
       request
         .get('/clubs/name')
         .query({ name: 'Teeyauh FC.' })
@@ -299,7 +299,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by stadium', () => {
-    it('should get book by stadium', (done) => {
+    it('should get club by stadium', (done) => {
       request
         .get('/clubs/stadium')
         .query({ name: 'Lokogoma' })
@@ -311,7 +311,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by Manager', () => {
-    it('should get book by manager', (done) => {
+    it('should get club by manager', (done) => {
       request
         .get('/clubs/manager')
         .query({ manager: 'Tayo' })
@@ -323,7 +323,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by Captain', () => {
-    it('should get book by captain', (done) => {
+    it('should get club by captain', (done) => {
       request
         .get('/clubs/captain')
         .query({ captain: 'Pierre' })
@@ -335,7 +335,7 @@ describe('Football Clubs Api', () => {
     })
   })
   describe('Search club by Country', () => {
-    it('should get book by country', (done) => {
+    it('should get club by country', (done) => {
       request
         .get('/clubs/country')
         .query({ country: 'Nigeria' })
