@@ -2,7 +2,7 @@ import validator from 'validator'
 import { hasUpperCase, hasSpecialChar, hasNumber } from '../utils/strings'
 
 // eslint-disable-next-line consistent-return
-const validateSignup = (req, res, next) => {
+const validateUserSignup = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body
 
   if (!firstName) {
@@ -59,4 +59,4 @@ const validateSignup = (req, res, next) => {
   next()
 }
 
-export default validateSignup
+export default validateUserSignup
